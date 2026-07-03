@@ -1,4 +1,6 @@
 
 AtlasQuestie-3.3.5
 
-Project not finished, test at you own risk
+Atlas dependent.
+
+Project not finished, test at your own risk.

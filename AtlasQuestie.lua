@@ -149,13 +149,18 @@ end
 -- positions are relative to, which is the standard convention used by
 -- coordinate-display addons on this client. Auto-hides after ~10 seconds.
 --
--- Built from solid-color textures (SetTexture(r,g,b,a), no file path)
--- rather than a built-in icon file, since we couldn't confirm an exact
--- in-client texture path for a ping-style graphic and didn't want to
--- repeat the "guessed a name, it silently does nothing" mistake from
--- elsewhere in this addon.
+-- kind is optional: "object" or "item" shows a pulsating bag icon
+-- instead of the default "?" (e.g. Lonebrow's Journal, an item you pick
+-- up rather than an NPC you talk to) -- same size-oscillation and same
+-- gold<->red color pulse as the "?", just applied to a texture's
+-- SetVertexColor instead of the text's SetTextColor. Any other kind
+-- (including "npc" or nil) keeps the original "?".
+--
+-- The "?" is built from a plain font glyph (no texture file needed).
+-- The bag icon uses "Interface\Icons\INV_Misc_Bag_08", a standard
+-- Blizzard icon present on the 3.3.5 client.
 local AQ_pingHideTimer = nil
-local function AQ_ShowMapPing(x, y)
+local function AQ_ShowMapPing(x, y, kind)
     if not (WorldMapDetailFrame and type(x) == "number" and type(y) == "number") then return end
 
     if not AQ.MapPing then
@@ -172,24 +177,45 @@ local function AQ_ShowMapPing(x, y)
         label:SetPoint("CENTER", ping, "CENTER", 0, 0)
         ping.label = label
 
+        -- Pulsating bag icon, for object/item quest starters. Hidden by
+        -- default; AQ_ShowMapPing toggles which one is visible per call.
+        local bagIcon = ping:CreateTexture(nil, "OVERLAY")
+        bagIcon:SetTexture("Interface\\Icons\\INV_Misc_Bag_08")
+        bagIcon:SetPoint("CENTER", ping, "CENTER", 0, 0)
+        bagIcon:Hide()
+        ping.bagIcon = bagIcon
+
         ping.pulseElapsed = 0
         ping:SetScript("OnUpdate", function(self, elapsed)
             self.pulseElapsed = self.pulseElapsed + elapsed
             local t = math.abs(math.sin(self.pulseElapsed * 2.0))
             -- Size: oscillates 14..26
             local size = 14 + 12 * t
-            self.label:SetFont("Fonts\\FRIZQT__.TTF", size, "OUTLINE")
             -- Color: crossfades gold (1, 0.9, 0) <-> red (1, 0.1, 0.1)
             -- t=1 -> gold, t=0 -> red
             local g = 0.1 + 0.8 * t   -- green channel
             local b = 0.1 - 0.1 * t   -- blue channel (0 for gold, tiny for red)
-            self.label:SetTextColor(1, g, math.max(0, b))
+            if self.bagIcon:IsShown() then
+                self.bagIcon:SetSize(size, size)
+                self.bagIcon:SetVertexColor(1, g, math.max(0, b))
+            else
+                self.label:SetFont("Fonts\\FRIZQT__.TTF", size, "OUTLINE")
+                self.label:SetTextColor(1, g, math.max(0, b))
+            end
         end)
 
         AQ.MapPing = ping
     end
 
     local ping = AQ.MapPing
+    if kind == "object" or kind == "item" then
+        ping.label:Hide()
+        ping.bagIcon:Show()
+    else
+        ping.bagIcon:Hide()
+        ping.label:Show()
+    end
+
     local w, h = WorldMapDetailFrame:GetWidth(), WorldMapDetailFrame:GetHeight()
     ping:ClearAllPoints()
     ping:SetPoint("CENTER", WorldMapDetailFrame, "TOPLEFT", (x / 100) * w, -(y / 100) * h)
@@ -206,7 +232,10 @@ end
 
 -- pingX, pingY are optional raw percent coordinates (0-100) for a
 -- temporary marker at the pickup location, shown once the zoom succeeds.
-local function AQ_OpenMapToZone(zoneName, coordStr, pingX, pingY)
+-- kind is optional ("npc"/"object"/"item"): passed straight through to
+-- AQ_ShowMapPing so it can show a bag icon instead of "?" for object/item
+-- quest starters.
+local function AQ_OpenMapToZone(zoneName, coordStr, pingX, pingY, kind)
     if not WorldMapFrame then return end
 
     -- No coordStr means AQ_GetNpcZoneCoords determined there's no real
@@ -246,7 +275,7 @@ local function AQ_OpenMapToZone(zoneName, coordStr, pingX, pingY)
         if isSubzone then
             print("|cFFFFD200AtlasQuestie:|r \"" .. zoneName .. "\" is a subzone - opened its parent zone on the map.")
         elseif pingX and pingY then
-            AQ_ShowMapPing(pingX, pingY)
+            AQ_ShowMapPing(pingX, pingY, kind)
         end
     elseif zoneName then
         print("|cFFFF0000AtlasQuestie:|r couldn't find \"" .. zoneName .. "\" on the world map (name may not match the client's zone list).")
@@ -328,7 +357,7 @@ local function AQ_MakeCoordButton(parent)
         GameTooltip:Hide()
     end)
     btn:SetScript("OnClick", function(self)
-        AQ_OpenMapToZone(self.zone, self.coords, self.x, self.y)
+        AQ_OpenMapToZone(self.zone, self.coords, self.x, self.y, self.kind)
     end)
     btn:Hide()
     return btn
@@ -1336,6 +1365,7 @@ local function AQ_RenderDetails(textStr, starterData, enderData, rewardsData, ha
         btn:SetPoint("TOPLEFT",  AQ.DetailsFrame, "TOPLEFT",  10, yOff)
         btn:SetPoint("TOPRIGHT", AQ.DetailsFrame, "TOPRIGHT", -10, yOff)
         btn.npcName = starterData.name
+        btn.kind    = starterData.kind
         btn.coords  = starterData.coords
         btn.zone    = starterData.zone
         btn.x       = starterData.x
@@ -1615,6 +1645,7 @@ function AQ.ShowQuestDetails(quest)
     local starterNpc = AQ_GetNpc(QuestieDB, starterId)
     local starterCoords, starterZone, starterX, starterY = AQ_GetNpcZoneCoords(QuestieDB, starterNpc)
     local starterName = starterNpc and (starterNpc.name or starterNpc.Name)
+    local starterKind = "npc"
 
     if not starterCoords then
         local starterObjectId = AQ_FirstSubId(startedByTbl, 2)
@@ -1623,6 +1654,7 @@ function AQ.ShowQuestDetails(quest)
             if oCoords then
                 starterCoords, starterZone, starterX, starterY = oCoords, oZone, oX, oY
                 starterName = AQ_GetObjectName(QuestieDB, starterObjectId) or starterName
+                starterKind = "object"
             end
         end
     end
@@ -1634,6 +1666,7 @@ function AQ.ShowQuestDetails(quest)
             if iCoords then
                 starterCoords, starterZone, starterX, starterY = iCoords, iZone, iX, iY
                 starterName = AQ_GetItemName(QuestieDB, starterItemId) or starterName
+                starterKind = "item"
             end
         end
     end
@@ -1687,6 +1720,7 @@ function AQ.ShowQuestDetails(quest)
         zone   = starterZone,
         x      = starterX,
         y      = starterY,
+        kind   = starterKind,
     }
     enderData = {
         name   = enderNpc and (enderNpc.name or enderNpc.Name),

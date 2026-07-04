@@ -450,6 +450,17 @@ local function AQ_FirstSubId(t, idx)
     return nil
 end
 
+-- Fetches the Questie object record for a game object (chest, journal,
+-- interactable body, etc.) by its object ID. Same pattern as AQ_GetNpc.
+local function AQ_GetObject(QuestieDB, objectId)
+    if not (QuestieDB and objectId and objectId ~= 0) then return nil end
+    if type(QuestieDB.GetObject) ~= "function" then return nil end
+    local ok, obj = pcall(QuestieDB.GetObject, QuestieDB, objectId)
+    if not (ok and obj) then ok, obj = pcall(QuestieDB.GetObject, objectId) end
+    if ok and obj then return obj end
+    return nil
+end
+
 -- Fetches an object's display name from Questie's own object record.
 local function AQ_GetObjectName(QuestieDB, objectId)
     local obj = AQ_GetObject(QuestieDB, objectId)
@@ -678,17 +689,6 @@ local function AQ_GetNpcZoneCoords(QuestieDB, npc)
     end
 
     return nil, nil
-end
-
--- Fetches the Questie object record for a game object (chest, journal,
--- interactable body, etc.) by its object ID. Same pattern as AQ_GetNpc.
-local function AQ_GetObject(QuestieDB, objectId)
-    if not (QuestieDB and objectId and objectId ~= 0) then return nil end
-    if type(QuestieDB.GetObject) ~= "function" then return nil end
-    local ok, obj = pcall(QuestieDB.GetObject, QuestieDB, objectId)
-    if not (ok and obj) then ok, obj = pcall(QuestieDB.GetObject, objectId) end
-    if ok and obj then return obj end
-    return nil
 end
 
 -- Gets spawn coordinates for a game object. The spawns table format is

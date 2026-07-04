@@ -147,12 +147,12 @@ end
 -- position (0-100 each, matching Questie's coordinate convention),
 -- relative to WorldMapDetailFrame -- the same frame GetPlayerMapPosition
 -- positions are relative to, which is the standard convention used by
--- coordinate-display addons on this client. Auto-hides after ~10 seconds.
+-- coordinate-display addons on this client. Auto-hides after ~9 seconds.
 --
 -- kind is optional: "object" or "item" shows a pulsating bag icon
 -- instead of the default "?" (e.g. Lonebrow's Journal, an item you pick
--- up rather than an NPC you talk to) -- same size-oscillation and same
--- gold<->red color pulse as the "?", just applied to a texture's
+-- up rather than an NPC you talk to) -- same timing and same gold<->red
+-- color pulse as the "?", just 20% smaller and applied to a texture's
 -- SetVertexColor instead of the text's SetTextColor. Any other kind
 -- (including "npc" or nil) keeps the original "?".
 --
@@ -189,14 +189,17 @@ local function AQ_ShowMapPing(x, y, kind)
         ping:SetScript("OnUpdate", function(self, elapsed)
             self.pulseElapsed = self.pulseElapsed + elapsed
             local t = math.abs(math.sin(self.pulseElapsed * 2.0))
-            -- Size: oscillates 14..26
+            -- Size: oscillates 14..26 for the "?"
             local size = 14 + 12 * t
             -- Color: crossfades gold (1, 0.9, 0) <-> red (1, 0.1, 0.1)
             -- t=1 -> gold, t=0 -> red
             local g = 0.1 + 0.8 * t   -- green channel
             local b = 0.1 - 0.1 * t   -- blue channel (0 for gold, tiny for red)
             if self.bagIcon:IsShown() then
-                self.bagIcon:SetSize(size, size)
+                -- Same pulse, 20% smaller (11.2..20.8) so the bag doesn't
+                -- read as oversized next to the "?".
+                local bagSize = size * 0.8
+                self.bagIcon:SetSize(bagSize, bagSize)
                 self.bagIcon:SetVertexColor(1, g, math.max(0, b))
             else
                 self.label:SetFont("Fonts\\FRIZQT__.TTF", size, "OUTLINE")
@@ -223,7 +226,7 @@ local function AQ_ShowMapPing(x, y, kind)
 
     AQ_pingHideTimer = (AQ_pingHideTimer or 0) + 1
     local myTimer = AQ_pingHideTimer
-    C_Timer.After(10, function()
+    C_Timer.After(9, function()
         if AQ_pingHideTimer == myTimer and AQ.MapPing then
             AQ.MapPing:Hide()
         end

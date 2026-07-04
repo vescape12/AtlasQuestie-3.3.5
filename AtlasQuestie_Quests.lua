@@ -312,26 +312,4 @@ AQ.QuestRewards = {
         money = 6000
     },
 
-        -- ========== Razorfen Kraul ==========
-
-    -- Lonebrow's Journal (quest 1100)
-    -- Pre-quest for The Crone of the Kraul (1101). Not handed out by a
-    -- standing NPC -- picked up as an item (Henrig Lonebrow's Journal,
-    -- item 5791) found on his body near the Great Lift in Thousand
-    -- Needles. Questie stores this in the quest's own startedBy item
-    -- slot, so AtlasQuestie.lua resolves the name and pin automatically
-    -- from Questie's item Sources data -- no entry needed here at all.
-    -- This quest also has no rewards of its own, so it needs no entry
-    -- in AQ.QuestRewards whatsoever.
-
-    -- Willix the Importer (quest 1144)
-    -- Neutral escort quest. Started by NPC 4508, who is entirely inside
-    -- Razorfen Kraul (in a tent near the final boss, Charlga Razorflank)
-    -- for the whole quest -- no outdoor pickup point exists. Questie's
-    -- normal startedBy NPC data already resolves him correctly (hence
-    -- the name shows fine); Questie simply has no outdoor coordinates
-    -- to give here, because there is no real outdoor location to point
-    -- at. Clicking "Starts:" will correctly tell you so rather than
-    -- open the map to nowhere.
-
 }

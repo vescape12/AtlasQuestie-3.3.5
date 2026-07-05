@@ -367,6 +367,55 @@ local function AQ_MakeCoordButton(parent)
 end
 
 -- ============================================================
+-- Shift-click-to-chat-link support for quests and items
+-- ============================================================
+--
+-- Blizzard's own quest log and bag slots get shift-click-to-link for
+-- free because that behavior is wired into their specific templates.
+-- Our quest rows and item icons are plain custom Buttons/FontStrings,
+-- so none of that comes for free here -- it has to be wired manually,
+-- the same way Blizzard's own code wires it on those built-in frames.
+--
+-- IsModifiedClick("CHATLINK") checks whichever modifier key the player
+-- has bound to "link to chat" (shift, by default) rather than assuming
+-- shift specifically, matching how Blizzard's own UI checks it.
+
+-- Builds a standard quest chat link -- the same format produced by
+-- shift-clicking a quest in the in-game quest log.
+local function AQ_BuildQuestLink(questId, title, level)
+    if not (questId and title) then return nil end
+    return "|cffffff00|Hquest:" .. questId .. ":" .. (level or 0) .. "|h[" .. title .. "]|h|r"
+end
+
+-- Inserts a quest link into whichever chat edit box is currently open
+-- (or the default one, if none is) when the link modifier is held.
+-- Returns true if a link was inserted, so callers can skip their normal
+-- click behavior (e.g. selecting the row) when this fires instead.
+local function AQ_TryLinkQuest(questId, title, level)
+    if not (IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
+    local link = AQ_BuildQuestLink(questId, title, level)
+    if link and ChatEdit_InsertLink then
+        ChatEdit_InsertLink(link)
+        return true
+    end
+    return false
+end
+
+-- Same idea for items. Uses GetItemInfo's own cached link rather than
+-- building one by hand, so it comes out complete and correct (item
+-- level, any suffixes, etc.) without us having to reconstruct it.
+local function AQ_TryLinkItem(itemId)
+    if not (IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
+    if not itemId then return false end
+    local _, itemLink = GetItemInfo(itemId)
+    if itemLink and HandleModifiedItemClick then
+        HandleModifiedItemClick(itemLink)
+        return true
+    end
+    return false
+end
+
+-- ============================================================
 -- Item icon factory (32×32 with quality border + hover tooltip)
 -- ============================================================
 
@@ -396,6 +445,9 @@ local function AQ_MakeItemIcon(parent)
         GameTooltip:Show()
     end)
     btn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    btn:SetScript("OnClick", function(self)
+        AQ_TryLinkItem(self.itemId)
+    end)
     return btn
 end
 
@@ -1096,6 +1148,7 @@ local function AQ_BuildQuestList()
             glow:Show()
         end
         btn:SetScript("OnClick", function()
+            if AQ_TryLinkQuest(questId, row.label, row.level) then return end
             AQ.SelectedQuestId = questId
             -- Update glow on every row immediately, without a full
             -- rebuild, so the click feels instant.
@@ -1848,6 +1901,7 @@ function AQ.ShowQuestChain(quest)
     for i, id in ipairs(chainIds) do
         local rowQ = AQ_GetQuestieQuest(QuestieDB, id)
         local label = (rowQ and rowQ.name) or ("Quest #" .. id)
+        local level = rowQ and (rowQ.questLevel or rowQ.level or rowQ.QuestLevel)
         -- isDungeonQuest: this row is the quest from the main dungeon list
         -- that originally opened the chain. Static -- doesn't change when
         -- you navigate to other chain quests. Tracked via AQ.DungeonAnchorQuestId.
@@ -1893,6 +1947,7 @@ function AQ.ShowQuestChain(quest)
         end
 
         row:SetScript("OnClick", function()
+            if AQ_TryLinkQuest(id, label, level) then return end
             -- Update the selected-chain glow instantly on all rows.
             AQ.SelectedChainQuestId = id
             for _, r in ipairs(popup.rows or {}) do

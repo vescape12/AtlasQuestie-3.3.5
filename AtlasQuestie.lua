@@ -1317,9 +1317,20 @@ function AQ.OnLoad()
         AQ.RewardIcons[i] = AQ_MakeItemIcon(AQ.DetailsFrame)
     end
 
-    -- Money + XP line
+    -- XP line
+    AQ.RewardXPText = AQ.DetailsFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    AQ.RewardXPText:SetJustifyH("LEFT")
+    AQ.RewardXPText:SetWordWrap(true)
+
+    -- Reputation line (all factions on one row: "Rep: X 500, Y 500")
+    AQ.RewardRepText = AQ.DetailsFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    AQ.RewardRepText:SetJustifyH("LEFT")
+    AQ.RewardRepText:SetWordWrap(true)
+
+    -- Money line
     AQ.RewardMoneyText = AQ.DetailsFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     AQ.RewardMoneyText:SetJustifyH("LEFT")
+    AQ.RewardMoneyText:SetWordWrap(true)
 
     hooksecurefunc("Atlas_OnShow", function()
         if AtlasQuestieDB.enabled then
@@ -1470,6 +1481,8 @@ local function AQ_RenderDetails(textStr, starterData, enderData, rewardsData, ha
     AQ.RewardLabel:Hide()
     AQ.ChoiceLabel:Hide()
     AQ.GuaranteedLabel:Hide()
+    AQ.RewardXPText:Hide()
+    AQ.RewardRepText:Hide()
     AQ.RewardMoneyText:Hide()
 
     if rewardsData and AQ_HasRealRewards(rewardsData) then
@@ -1480,37 +1493,45 @@ local function AQ_RenderDetails(textStr, starterData, enderData, rewardsData, ha
         AQ.RewardLabel:Show()
         yOff = yOff - 14
 
-        -- XP, money, rep first
-        local parts = {}
+        -- Row order mirrors WoW's own quest-reward panel: XP, then
+        -- reputation, then item choices, then guaranteed items, then
+        -- money last. Each gets its own row (rather than one long
+        -- concatenated line) so a quest with several rep factions
+        -- wraps/stacks cleanly instead of overflowing the frame's
+        -- right edge.
+
+        -- XP
         if type(rewardsData.xp) == "number" and rewardsData.xp > 0 then
-            table.insert(parts, "|cFF8080FF" .. rewardsData.xp .. " XP|r")
+            AQ.RewardXPText:ClearAllPoints()
+            AQ.RewardXPText:SetPoint("TOPLEFT",  AQ.DetailsFrame, "TOPLEFT",  10, yOff)
+            AQ.RewardXPText:SetPoint("TOPRIGHT", AQ.DetailsFrame, "TOPRIGHT", -10, yOff)
+            AQ.RewardXPText:SetText("|cFF8080FF" .. rewardsData.xp .. " XP|r")
+            AQ.RewardXPText:Show()
+            yOff = yOff - 14
         end
-        if type(rewardsData.money) == "number" and rewardsData.money > 0 then
-            local g = math.floor(rewardsData.money / 10000)
-            local s = math.floor((rewardsData.money % 10000) / 100)
-            local c = rewardsData.money % 100
-            if g > 0 then table.insert(parts, "|cFFFFD700" .. g .. "g|r") end
-            if s > 0 then table.insert(parts, "|cFFC0C0C0" .. s .. "s|r") end
-            if c > 0 then table.insert(parts, "|cFFCD7F32" .. c .. "c|r") end
-        end
-        if type(rewardsData.rep) == "table" then
+
+        -- Reputation -- all factions condensed onto one row:
+        -- "Rep: Stormwind 500, Gnomeregan Exiles 500"
+        if type(rewardsData.rep) == "table" and rewardsData.rep[1] then
+            local repParts = {}
             for _, entry in ipairs(rewardsData.rep) do
                 if type(entry) == "table" and entry[1] and entry[2] then
-                    table.insert(parts, "|cFF00FF00+" .. entry[2] .. " " .. entry[1] .. " rep|r")
+                    table.insert(repParts, entry[1] .. " " .. entry[2])
                 end
             end
-        end
-        if #parts > 0 then
-            AQ.RewardMoneyText:ClearAllPoints()
-            AQ.RewardMoneyText:SetPoint("TOPLEFT", AQ.DetailsFrame, "TOPLEFT", 10, yOff)
-            AQ.RewardMoneyText:SetText(table.concat(parts, "  "))
-            AQ.RewardMoneyText:Show()
-            yOff = yOff - 14
+            if #repParts > 0 then
+                AQ.RewardRepText:ClearAllPoints()
+                AQ.RewardRepText:SetPoint("TOPLEFT",  AQ.DetailsFrame, "TOPLEFT",  10, yOff)
+                AQ.RewardRepText:SetPoint("TOPRIGHT", AQ.DetailsFrame, "TOPRIGHT", -10, yOff)
+                AQ.RewardRepText:SetText("|cFF00FF00Rep:|r " .. table.concat(repParts, ", "))
+                AQ.RewardRepText:Show()
+                yOff = yOff - 14
+            end
         end
 
         local iconSlot = 1
 
-        -- Choice rewards (pick one) -- shown after XP/money/rep
+        -- Choice rewards (pick one)
         local hasChoice = type(rewardsData.choice) == "table" and #rewardsData.choice > 0
         if hasChoice then
             AQ.ChoiceLabel:ClearAllPoints()
@@ -1560,6 +1581,25 @@ local function AQ_RenderDetails(textStr, starterData, enderData, rewardsData, ha
                 end
             end
             yOff = yOff - ICON_SIZE - 4
+        end
+
+        -- Money -- last, matching WoW's own reward panel order
+        if type(rewardsData.money) == "number" and rewardsData.money > 0 then
+            local moneyParts = {}
+            local g = math.floor(rewardsData.money / 10000)
+            local s = math.floor((rewardsData.money % 10000) / 100)
+            local c = rewardsData.money % 100
+            if g > 0 then table.insert(moneyParts, "|cFFFFD700" .. g .. "g|r") end
+            if s > 0 then table.insert(moneyParts, "|cFFC0C0C0" .. s .. "s|r") end
+            if c > 0 then table.insert(moneyParts, "|cFFCD7F32" .. c .. "c|r") end
+            if #moneyParts > 0 then
+                AQ.RewardMoneyText:ClearAllPoints()
+                AQ.RewardMoneyText:SetPoint("TOPLEFT",  AQ.DetailsFrame, "TOPLEFT",  10, yOff)
+                AQ.RewardMoneyText:SetPoint("TOPRIGHT", AQ.DetailsFrame, "TOPRIGHT", -10, yOff)
+                AQ.RewardMoneyText:SetText(table.concat(moneyParts, "  "))
+                AQ.RewardMoneyText:Show()
+                yOff = yOff - 14
+            end
         end
     end
 

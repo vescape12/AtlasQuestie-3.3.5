@@ -210,6 +210,43 @@ AQ.QuestRewards = {
         money = 800,   -- 8 silver
     },
 
+        -- ========== The Deadmines ==========
+
+    -- Red Silk Bandanas
+    [214] = {
+        xp     = 1900,
+        rep    = { { "Stormwind", 500 } },
+        choice = { 2074, 2089, 6094 },
+    },
+
+    -- Collecting Memories
+    [168] = {
+        xp     = 1350,
+        rep    = { { "Ironforge", 250 } },
+        choice = { 2037, 2036 },
+    },
+
+    -- Oh Brother. . .
+    [167] = {
+        xp     = 1550,
+        rep    = { { "Ironforge", 250 } },
+        item = { 1893 },
+    },
+
+    -- Underground Assault
+    [2040] = {
+        xp     = 2350,
+        rep    = { { "Stormwind", "Gnomeregan Exiles", 500 } },
+        choice = { 7606, 7607 },
+    },
+
+    -- The Defias Brotherhood
+    [166] = {
+        xp     = 2600,
+        rep    = { { "Stormwind", 250 } },
+        choice = { 6087, 2041, 2042 },
+    },
+
         -- ========== Wailing Caverns ==========
 
     -- Leaders of the Fang (quest 914)

@@ -236,7 +236,7 @@ AQ.QuestRewards = {
     -- Underground Assault
     [2040] = {
         xp     = 2350,
-        rep    = { { "Stormwind", 500 "Gnomeregan Exiles", 500 } },
+        rep    = { { "Stormwind", 500, "Gnomeregan Exiles", 500 } },
         choice = { 7606, 7607 },
     },
 

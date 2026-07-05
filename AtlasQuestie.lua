@@ -1589,9 +1589,9 @@ local function AQ_RenderDetails(textStr, starterData, enderData, rewardsData, ha
             local g = math.floor(rewardsData.money / 10000)
             local s = math.floor((rewardsData.money % 10000) / 100)
             local c = rewardsData.money % 100
-            if g > 0 then table.insert(moneyParts, "|cFFFFD700" .. g .. "g|r") end
-            if s > 0 then table.insert(moneyParts, "|cFFC0C0C0" .. s .. "s|r") end
-            if c > 0 then table.insert(moneyParts, "|cFFCD7F32" .. c .. "c|r") end
+            if g > 0 then table.insert(moneyParts, "|cFFFFD700" .. g .. " gold|r") end
+            if s > 0 then table.insert(moneyParts, "|cFFC0C0C0" .. s .. " silver|r") end
+            if c > 0 then table.insert(moneyParts, "|cFFCD7F32" .. c .. " copper|r") end
             if #moneyParts > 0 then
                 AQ.RewardMoneyText:ClearAllPoints()
                 AQ.RewardMoneyText:SetPoint("TOPLEFT",  AQ.DetailsFrame, "TOPLEFT",  10, yOff)

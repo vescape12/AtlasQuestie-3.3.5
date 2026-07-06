@@ -11,8 +11,6 @@ Built for **3.3.5 (WotLK)**.
 | [Atlas](https://github.com/NoM0Re/WoW-3.3.5a-Addons2/raw/main/src/Addons/Atlas.zip) | **Required** — AtlasQuestie attaches to Atlas's window and reads its currently selected dungeon. |
 | [Questie](https://github.com/Aldori15/Questie) | **Required** — supplies all quest names, NPCs, and item data. AtlasQuestie has no quest database of its own. |
 
-Load order doesn't matter; AtlasQuestie waits for both to be ready.
-
 ## Usage
 
 Open Atlas and select a dungeon as normal — the quest list appears automatically alongside it.

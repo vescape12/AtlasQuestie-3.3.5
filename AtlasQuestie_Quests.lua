@@ -197,11 +197,22 @@ AQ.Dungeons = {
 
     RazorfenKraul = {
         1101, -- The Crone of the Kraul (Alliance)
+        { xp = 3300, choice = { 4197, 6742, 6725 }, items = { 29200 } },
+        
         1102, -- A Vengeful Fate (Horde)
+        { xp = 3300, rep = { { "Thunder Bluff", 500 } }, choice = { 4197, 6742, 6725 } },
+        
         1142, -- Mortality Wanes (Alliance, inside)
+        { xp = 3650, rep = { { "Darnassus", 500 } }, choice = { 6751, 6752 } },
+        
         1109, -- Going, Going, Guano! (Horde)
+        { xp = 3150, rep = { { "Undercity", 500 } } },
+        
         1221, -- Blueleaf Tubers (neutral)
+        { xp = 3150, rep = { { "Ratchet", 500 } }, items = { 6755 } },
+        
         1144, -- Willix the Importer (neutral, escort)
+        { xp = 3650, rep = { { "Ratchet", 500 } }, choice = { 6748, 6750, 6749 } },
     },
 
     SMGraveyard = {

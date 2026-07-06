@@ -159,17 +159,40 @@ AQ.Dungeons = {
 
     Gnomeregan = {
         2924, -- Essential Artificials
+        { xp = 3650, money = 5500, rep = { { "Gnomeregan Exiles", 500 } } },
+        
         2930, -- Data Rescue
+        { xp = 3650, money = 2500, rep = { { "Gnomeregan Exiles", 500 } }, items = { 9605, 9604 } },
+        
         2926, -- Gnogaine
+        { xp = 3300, money = 2200, rep = { { "Gnomeregan Exiles", 500 } } },
+        
         2928, -- Gyrodrillmatic Excavationators
+        { xp = 3650, rep = { { "Stormwind", 500 }, { "Gnomeregan Exiles", 500 } }, choice = { 9608, 9609 } },
+        
         2929, -- The Grand Betrayal
+        { xp = 4950, money = 3500, rep = { { "Gnomeregan Exiles", 500 } }, choice = { 9623, 9624, 9625 } },
+        
         2922, -- Save Techbot's Brain!
+        { xp = 2650, money = 2000, rep = { { "Gnomeregan Exiles", 350 } } },
+        
         2841, -- Rig Wars (Horde)
+        { xp = 4950, rep = { { "Orgrimmar", 500 } }, choice = { 9623, 9624, 9625 } },
+        
         2904, -- A Fine Mess
+        { xp = 3650, choice = { 9535, 9536 } },
+        
         2843, -- Gnomer-gooooone!
+        { items = { 9173 } },
+        
         2948, -- Gnome Improvement
+        { xp = 3300, rep = { { "Ironforge", 250 }, { "Gnomeregan Exiles", 250 } }, items = { 9538 } },
+        
         2950, -- Nogg's Ring Redo
+        { xp = 3300, rep = { { "Orgrimmar", 250 } }, items = { 9588 } },
+        
         2962, -- The Only Cure is More Green Glow
+        { xp = 3650, money = 2500 },
     },
 
     RazorfenKraul = {

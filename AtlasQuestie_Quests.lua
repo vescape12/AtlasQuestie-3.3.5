@@ -97,15 +97,15 @@ AQ.Dungeons = {
         { xp = 2000, rep = { { "Darnassus", 250 } }, choice = { 10657, 10658 } },
     },
 
-    ShadowfangKeep = {
+        ShadowfangKeep = {
         1013, -- The Book of Ur
         { xp = 3150, rep = { { "Undercity", 500 } }, choice = { 6335, 4534 } },
-        
+       
         1014, -- Arugal Must Die
         { xp = 3300, rep = { { "Undercity", 500 } }, items = { 6414 } },
-        
+       
         1098, -- Deathstalkers in Shadowfang
-        { xp = 3050, rep = { { "Undercity", 500 } }, money = 1800 }, items = { 3324 } },
+        { xp = 3050, rep = { { "Undercity", 500 } }, money = 1800, items = { 3324 } },
     },
 
     BlackfathomDeeps = {

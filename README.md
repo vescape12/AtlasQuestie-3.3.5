@@ -1,4 +1,4 @@
-# AtlasQuestie
+# AtlasQuestie-3.3.5
 
 An AtlasQuest-style quest list for the classic **Atlas** addon, powered by **Questie**'s quest/NPC/item database. Shows the quest chain and rewards for whichever dungeon you have open in Atlas — no separate window, no manual lookups.
 

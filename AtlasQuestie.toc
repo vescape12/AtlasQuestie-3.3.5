@@ -3,8 +3,7 @@
 ## Notes: AtlasQuest-style quest helper, powered by Questie data, for 3.3.5
 ## Author: Sjoomarken
 ## Version: 1.0
-## Dependencies: Atlas
-## OptionalDeps: Questie
+## Dependencies: Atlas, Questie
 
 AtlasQuestie_Quests.lua
 AtlasQuestie.lua

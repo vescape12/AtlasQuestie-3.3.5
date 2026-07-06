@@ -8,8 +8,8 @@ Built for **3.3.5 (WotLK)**.
 
 | Addon | Required? |
 |---|---|
-| [Atlas](https://www.curseforge.com/wow/addons/atlas-classic) | **Required** — AtlasQuestie attaches to Atlas's window and reads its currently selected dungeon. |
-| [Questie](https://github.com/Questie/Questie) | **Required** — supplies all quest names, NPCs, and item data. AtlasQuestie has no quest database of its own. |
+| [Atlas]((https://github.com/NoM0Re/WoW-3.3.5a-Addons2/raw/main/src/Addons/Atlas.zip)) | **Required** — AtlasQuestie attaches to Atlas's window and reads its currently selected dungeon. |
+| [Questie]((https://github.com/Aldori15/Questie)) | **Required** — supplies all quest names, NPCs, and item data. AtlasQuestie has no quest database of its own. |
 
 Load order doesn't matter; AtlasQuestie waits for both to be ready.
 
@@ -18,10 +18,6 @@ Load order doesn't matter; AtlasQuestie waits for both to be ready.
 Open Atlas and select a dungeon as normal — the quest list appears automatically alongside it.
 
 `/aq toggle` — enable/disable AtlasQuestie.
-
-## Adding/updating quest data
-
-All dungeon quest IDs and rewards live in **`AtlasQuestie_Quests.lua`** — it's the only file you should ever need to touch. See the comment block at the top of that file for the format.
 
 ## Status
 

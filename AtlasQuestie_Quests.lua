@@ -108,33 +108,33 @@ AQ.Dungeons = {
         { xp = 3050, rep = { { "Undercity", 500 } }, money = 1800, items = { 3324 } },
     },
 
-    BlackfathomDeeps = {
+        BlackfathomDeeps = {
         6561, -- Blackfathom Villainy, Horde
-        { xp = 3300, rep = { { "Argent Dawn", 500 }, { "Thunder Bluff", 500 } }, money = 6500 }, choice = { 7001, 7002 } },
-    
+        { xp = 3300, rep = { { "Argent Dawn", 500 }, { "Thunder Bluff", 500 } }, money = 6500, choice = { 7001, 7002 } },
+   
         6563, -- The Essence of Aku'Mai
         { xp = 1750, rep = { { "Darkspear Trolls", 250 } }, money = 1400 },
-    
+   
         6565, -- Allegiance to the Old Gods, part 2 of 2
-        { xp = 3150, rep = { { "Darkspear Trolls", 500 } }, money = 4000 }, choice = { 17694, 17695 } },
-
+        { xp = 3150, rep = { { "Darkspear Trolls", 500 } }, money = 4000, choice = { 17694, 17695 } },
+        
         6921, -- Amongst the Ruins
         { xp = 3300, rep = { { "Darkspear Trolls", 500 } }, money = 4500 },
-
+        
         6922, -- Baron Aquanis
         { xp = 3650, rep = { { "Darkspear Trolls", 500 } }, choice = { 16886, 16887 } },
-
-        971,  -- Knowledge in the Deeps
+        
+        971, -- Knowledge in the Deeps
         { xp = 2750, rep = { { "Ironforge", 75 } }, items = { 6743 } },
-
+        
         1199, -- Twilight Falls
         { xp = 3050, rep = { { "Argent Dawn", 500 }, { "Darnassus", 500 } }, items = { 6998, 7000 } },
-
+        
         1200, -- Blackfathom Villainy, Alliance
-        { xp = 3300, rep = { { "Argent Dawn", 500 }, { "Darnassus", 500 } }, money = 6500 }, choice = { 7001, 7002 } },
-
+        { xp = 3300, rep = { { "Argent Dawn", 500 }, { "Darnassus", 500 } }, money = 6500, choice = { 7001, 7002 } },
+        
         1275, -- Researching the Corruption
-        { xp = 2900, rep = { { "Darnassus", 250 } }, money = 3500 }, choice = { 7003, 7004 } },
+        { xp = 2900, rep = { { "Darnassus", 250 } }, money = 3500, choice = { 7003, 7004 } },
     },
 
     TheStockade = {

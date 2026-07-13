@@ -217,43 +217,104 @@ AQ.Dungeons = {
 
     SMGraveyard = {
         1051, -- Vorrel's Revenge
+        { xp = 4350, rep = { { "Undercity", 500 } }, choice = { 7750, 4643 }, items = { 7751 } },
     },
 
     SMLibrary = {
         1049, -- Compendium of the Fallen
+        { xp = 5850, rep = { { "Thunder Bluff", 500 } }, choice = { 7747, 17508, 7749 } },
+        
         1050, -- Mythology of the Titans
+        { xp = 5850, rep = { { "Ironforge", 500 } }, items = { 7746 } },
+        
         1160, -- Test of Lore
+        { xp = 5250, rep = { { "Undercity", 500 } } },
     },
 
     SMArmory = {
         1053,  -- In the Name of the Light
+        { xp = 6550, rep = { { "Stormwind", 500 } }, choice = { 6829, 6830, 6831, 11262 } },
+        
         14355, -- Into The Scarlet Monastery
+        { xp = 7200, rep = { { "Undercity", 500 } }, choice = { 6802, 6803, 10711 } },
     },
 
     SMCathedral = {
         1113, -- Hearts of Zeal
+        { xp = 4350, rep = { { "Undercity", 500 } } },
     },
 
     RazorfenDowns = {
-        3341,  -- Bring the End
-        6626,  -- A Host of Evil
+        3341, -- Bring the End
+        { xp = 5550, rep = { { "Undercity", 500 } }, items = { 10823, 10824 } },
+
+        6626, -- A Host of Evil
+        { xp = 4100, money = 7500 },
+
         14353, -- An Unholy Alliance
-        3525,  -- Extinguishing the Idol
-        3636,  -- Bring the Light
+        { xp = 5250, money = 2000, choice = { 17039, 17042, 17043 } },
+
+        3525, -- Extinguishing the Idol
+        { xp = 5550, items = { 10710 } },
+
+        3636, -- Bring the Light
+        { xp = 5550, rep = { { "Stormwind", 500 } }, items = { 10823, 10824 } },
     },
 
     Uldaman = {
-        704,  -- Agmond's Fate
-        721,  -- A Sign of Hope
-        709,  -- Solution to Doom
-        2418, -- Power Stones
-        2240, -- The Hidden Chamber
-        2200, -- Back to Uldaman
+        709, -- Solution to Doom
+        { xp = 4350, items = { 4746 } },
+
+        2204, -- Restoring the Necklace
+        { xp = 7900 },
+
         1139, -- The Lost Tablets of Will
+        { xp = 8300, money = 13000, rep = { { "Ironforge", 500 } }, items = { 6723 } },
+
+        2339, -- Find the Gems and Power Source
+        { xp = 7900, rep = { { "Darkspear Trolls", 500 } } },
+
+        1360, -- Reclaimed Treasures
+        { xp = 5050, money = 6000, rep = { { "Ironforge", 250 } } },
+
+        2341, -- Necklace Recovery, Take 3
+        { xp = 7900, rep = { { "Darkspear Trolls", 250 } }, items = { 7888 } },
+
+        2284, -- Necklace Recovery, Take 2
+        { xp = 6850, rep = { { "Orgrimmar", 500 } } },
+
+        2342, -- Reclaimed Treasures
+        { xp = 5050, money = 6000, rep = { { "Undercity", 250 } } },
+
+        2418, -- Power Stones
+        { xp = 3500, rep = { { "Booty Bay", 250 }, { "Bloodsail Buccaneers", 250 } }, choice = { 9522, 10358, 10359 } },
+
+        2240, -- The Hidden Chamber
+        { xp = 6550, rep = { { "Ironforge", 500 } }, choice = { 9626, 9627 } },
+
+        722, -- Amulet of Secrets
+        { xp = 4350, rep = { { "Ironforge", 250 } } },
+
+        17, -- Uldaman Reagent Run
+        { xp = 4800, money = 5500, rep = { { "Ironforge", 250 } }, items = { 9030 } },
+
+        2202, -- Uldaman Reagent Run
+        { xp = 4800, money = 5500, rep = { { "Darkspear Trolls", 250 } }, items = { 9030 } },
+
+        704, -- Agmond's Fate
+        { xp = 3900, rep = { { "Ironforge", 250 } }, items = { 4980 } },
+
         2278, -- The Platinum Discs
-        2198, -- The Shattered Necklace
-        3375, -- Replacement Phial
-        17,   -- Uldaman Reagent Run
+        { xp = 9050 },
+
+        2361, -- Restoring the Necklace
+        { xp = 7900, rep = { { "Gnomeregan Exiles", 500 } }, items = { 7673 } },
+
+        2439, -- The Platinum Discs
+        { xp = 600, choice = { 3928, 6149 }, items = { 9587 } },
+
+        2440, -- The Platinum Discs
+        { xp = 600, rep = { { "Thunder Bluff", 10 } }, choice = { 3928, 6149 }, items = { 9587 } },
     },
 }
 

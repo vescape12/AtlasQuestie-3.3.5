@@ -265,9 +265,6 @@ AQ.Dungeons = {
         709, -- Solution to Doom
         { xp = 4350, items = { 4746 } },
 
-        2204, -- Restoring the Necklace
-        { xp = 7900 },
-
         1139, -- The Lost Tablets of Will
         { xp = 8300, money = 13000, rep = { { "Ironforge", 500 } }, items = { 6723 } },
 

@@ -292,9 +292,6 @@ AQ.Dungeons = {
         2240, -- The Hidden Chamber
         { xp = 6550, rep = { { "Ironforge", 500 } }, choice = { 9626, 9627 } },
 
-        722, -- Amulet of Secrets
-        { xp = 4350, rep = { { "Ironforge", 250 } } },
-
         17, -- Uldaman Reagent Run
         { xp = 4800, money = 5500, rep = { { "Ironforge", 250 } }, items = { 9030 } },
 
@@ -303,9 +300,6 @@ AQ.Dungeons = {
 
         704, -- Agmond's Fate
         { xp = 3900, rep = { { "Ironforge", 250 } }, items = { 4980 } },
-
-        2278, -- The Platinum Discs
-        { xp = 9050 },
 
         2361, -- Restoring the Necklace
         { xp = 7900, rep = { { "Gnomeregan Exiles", 500 } }, items = { 7673 } },

@@ -277,9 +277,6 @@ AQ.Dungeons = {
         2341, -- Necklace Recovery, Take 3
         { xp = 7900, rep = { { "Darkspear Trolls", 250 } }, items = { 7888 } },
 
-        2284, -- Necklace Recovery, Take 2
-        { xp = 6850, rep = { { "Orgrimmar", 500 } } },
-
         2342, -- Reclaimed Treasures
         { xp = 5050, money = 6000, rep = { { "Undercity", 250 } } },
 

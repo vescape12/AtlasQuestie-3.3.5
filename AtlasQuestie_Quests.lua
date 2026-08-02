@@ -347,9 +347,6 @@ AQ.Dungeons = {
         2991, -- Nekrum's Medallion
         { xp = 9050, money = 7000, rep = { { "Ironforge", 500 } } },
 
-        2861, -- Tabetha's Task
-        { xp = 580 },
-
         2846, -- Tiara of the Deep
         { xp = 8650, money = 6500, items = { 9527, 9531 } },
 

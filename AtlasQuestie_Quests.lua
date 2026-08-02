@@ -309,9 +309,6 @@ AQ.Dungeons = {
         7067, -- The Pariah's Instructions
         { xp = 9400, money = 14000, items = { 17774, 17757 } },
 
-        7044, -- Legends of Maraudon
-        { xp = 9800 },
-
         7064, -- Corruption of Earth and Seed
         { xp = 10600, rep = { { "Cenarion Circle", 500 } }, choice = { 17705, 17743, 17753 } },
 

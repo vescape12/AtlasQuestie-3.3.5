@@ -336,6 +336,35 @@ AQ.Dungeons = {
         7029, -- Vyletongue Corruption
         { xp = 9050, choice = { 17768, 17778, 17770 } },
         },
+
+    Zul'Farrak = {
+        2768, -- Divino-matic Rod
+        { xp = 9050, rep = { { "Gadgetzan", 500 } }, choice = { 9533, 9534 } },
+
+        3527, -- The Prophecy of Mosh'aru
+        { xp = 9050 },
+
+        2991, -- Nekrum's Medallion
+        { xp = 9050, money = 7000, rep = { { "Ironforge", 500 } } },
+
+        2861, -- Tabetha's Task
+        { xp = 580 },
+
+        2846, -- Tiara of the Deep
+        { xp = 8650, money = 6500, items = { 9527, 9531 } },
+
+        2770, -- Gahz'rilla
+        { xp = 10200, money = 7500, items = { 11122 } },
+
+        2936, -- The Spider God
+        { xp = 8300, rep = { { "Darkspear Trolls", 500 } } },
+
+        2865, -- Scarab Shells
+        { xp = 8300, money = 6500, rep = { { "Gadgetzan", 500 } } },
+
+        3042, -- Troll Temper
+        { xp = 8300, money = 19500 },
+        },
 }
 
 -- ============================================================

@@ -338,7 +338,7 @@ AQ.Dungeons = {
 
         7029, -- Vyletongue Corruption
         { xp = 9050, choice = { 17768, 17778, 17770 } },
-}
+},
 
 -- ============================================================
 -- Do not edit below this line.

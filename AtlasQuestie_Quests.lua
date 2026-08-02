@@ -304,6 +304,41 @@ AQ.Dungeons = {
         2440, -- The Platinum Discs
         { xp = 600, rep = { { "Thunder Bluff", 10 } }, choice = { 3928, 6149 }, items = { 9587 } },
         },
+
+    Maraudon = {
+        7067, -- The Pariah's Instructions
+        { xp = 9400, money = 14000, items = { 17774, 17757 } },
+
+        7044, -- Legends of Maraudon
+        { xp = 9800 },
+
+        7064, -- Corruption of Earth and Seed
+        { xp = 10600, rep = { { "Cenarion Circle", 500 } }, choice = { 17705, 17743, 17753 } },
+
+        7065, -- Corruption of Earth and Seed
+        { xp = 10600, rep = { { "Cenarion Circle", 500 } }, choice = { 17705, 17743, 17753 } },
+
+        7028, -- Twisted Evils
+        { xp = 9050, choice = { 17775, 17776, 17777, 17779 } },
+
+        7066, -- Seed of Life
+        { xp = 10600, money = 15000, rep = { { "Cenarion Circle", 500 } } },
+
+        7046, -- The Scepter of Celebras
+        { xp = 8150, items = { 17191 } },
+
+        7070, -- Shadowshard Fragments
+        { xp = 7200, rep = { { "Stormwind", 500 } }, choice = { 17772, 17773 } },
+
+        7068, -- Shadowshard Fragments
+        { xp = 7200, rep = { { "Darkspear Trolls", 500 } }, choice = { 17772, 17773 } },
+
+        7041, -- Vyletongue Corruption
+        { xp = 9050, choice = { 17768, 17778, 17770 } },
+
+        7029, -- Vyletongue Corruption
+        { xp = 9050, choice = { 17768, 17778, 17770 } },
+        },
 }
 
 -- ============================================================

@@ -337,7 +337,7 @@ AQ.Dungeons = {
         { xp = 9050, choice = { 17768, 17778, 17770 } },
         },
 
-    Zul'Farrak = {
+    ZulFarrak = {
         2768, -- Divino-matic Rod
         { xp = 9050, rep = { { "Gadgetzan", 500 } }, choice = { 9533, 9534 } },
 

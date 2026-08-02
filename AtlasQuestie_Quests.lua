@@ -303,7 +303,8 @@ AQ.Dungeons = {
 
         2440, -- The Platinum Discs
         { xp = 600, rep = { { "Thunder Bluff", 10 } }, choice = { 3928, 6149 }, items = { 9587 } },
-    }
+        },
+}
 
 -- ============================================================
 -- Do not edit below this line.

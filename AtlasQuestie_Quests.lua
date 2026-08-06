@@ -362,6 +362,38 @@ AQ.Dungeons = {
         3042, -- Troll Temper
         { xp = 8300, money = 19500 },
         },
+
+    SunkenTemple = {
+        3528, -- The God Hakkar
+        { xp = 11400, money = 24000, choice = { 10749, 10750, 10751 }, items = { 10663 } },
+
+        4146, -- Zapper Fuel
+        { xp = 7350 },
+
+        3447, -- Secret of the Circle
+        { xp = 10600, items = { 10773 } },
+
+        1446, -- Jammal'an the Prophet
+        { xp = 11400, choice = { 11123, 11124 } },
+
+        3446, -- Into the Depths
+        { xp = 10600 },
+
+        8733, -- Eranikus, Tyrant of the Dream
+        { xp = 9550, rep = { { "Brood of Nozdormu", 25 }, { "Cenarion Circle", 25 } } },
+
+        3380, -- The Sunken Temple
+        { xp = 5300 },
+
+        1445, -- The Temple of Atal'Hakkar
+        { xp = 10200, rep = { { "Orgrimmar", 500 } }, items = { 1490 } },
+
+        3373, -- The Essence of Eranikus
+        { xp = 4050, items = { 10455 } },
+
+        1475, -- Into The Temple of Atal'Hakkar
+        { xp = 10200, rep = { { "Ironforge", 500 } }, items = { 1490 } },
+        },
 }
 
 -- ============================================================

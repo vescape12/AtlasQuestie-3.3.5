@@ -363,7 +363,7 @@ AQ.Dungeons = {
         { xp = 8300, money = 19500 },
         },
 
-    SunkenTemple = {
+    TheSunkenTemple = {
         3528, -- The God Hakkar
         { xp = 11400, money = 24000, choice = { 10749, 10750, 10751 }, items = { 10663 } },
 
